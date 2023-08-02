@@ -532,7 +532,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
 
   EventName.resumeRequired: {
     ET.WARNING: Alert(
-      "오토 홀드",
+      "오토홀드",
       "",
       AlertStatus.userPrompt, AlertSize.small,
       Priority.MID, VisualAlert.none, AudibleAlert.none, .2),
@@ -736,7 +736,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
 
   EventName.gasPressedOverride: {
     ET.OVERRIDE_LONGITUDINAL: Alert(
-      "",
+      "ACC 일시정지됨(가속 페달 밟힘)",
       "",
       AlertStatus.normal, AlertSize.none,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, .1),
@@ -744,7 +744,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
 
   EventName.steerOverride: {
     ET.OVERRIDE_LATERAL: Alert(
-      "",
+      "조향 제어 일시정지됨(사용자 조작중)",
       "",
       AlertStatus.normal, AlertSize.none,
       Priority.LOWEST, VisualAlert.none, AudibleAlert.none, .1),
