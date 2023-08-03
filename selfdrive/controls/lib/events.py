@@ -253,7 +253,7 @@ def calibration_incomplete_alert(CP: car.CarParams, CS: car.CarState, sm: messag
 def no_gps_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int) -> Alert:
   return Alert(
     "GPS 수신 감도 나쁨",
-    "야외에서도 해당 메세지가 계속될경우 하드웨어 결함일 수 있습니다",
+    "야외에서도 해당 메세지가 계속될 경우 하드웨어 결함일 수 있습니다",
     AlertStatus.normal, AlertSize.mid,
     Priority.LOWER, VisualAlert.none, AudibleAlert.none, .2, creation_delay=300.)
 
