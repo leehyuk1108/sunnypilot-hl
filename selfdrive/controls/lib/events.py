@@ -590,6 +590,14 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
       Priority.LOW, VisualAlert.none, AudibleAlert.disengage, 1.),
   },
 
+  EventName.manualDrivingRequired: {
+    ET.WARNING: Alert(
+      "오픈파일럿 비활성화",
+      "수동 운전으로 전환됩니다",
+      AlertStatus.normal, AlertSize.mid,
+      Priority.LOW, VisualAlert.none, AudibleAlert.disengage, 1.),
+  },
+
   EventName.manualLongitudinalRequired: {
     ET.WARNING: Alert(
       "ACC 꺼짐",
