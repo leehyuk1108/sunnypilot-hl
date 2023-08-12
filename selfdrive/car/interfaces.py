@@ -515,15 +515,18 @@ class CarInterfaceBase(ABC):
       # Disable on rising and falling edge of cancel for both stock and OP long
       if b.type == ButtonType.cancel:
         if not cs_out.madsEnabled:
-          events.add(EventName.buttonCancel)
+          #events.add(EventName.buttonCancel)
+          pass
         elif not self.cruise_cancelled_btn:
           self.cruise_cancelled_btn = True
-          events.add(EventName.manualLongitudinalRequired)
+          #events.add(EventName.manualLongitudinalRequired)
+          pass
       # do disable on MADS button if ACC is disabled
       if b.type == ButtonType.altButton1 and b.pressed:
         if not cs_out.madsEnabled:  # disabled MADS
           if not cs_out.cruiseState.enabled:
-            events.add(EventName.buttonCancel)
+            #events.add(EventName.buttonCancel)
+            pass
           else:
             events.add(EventName.manualSteeringRequired)
         else:  # enabled MADS
@@ -534,14 +537,16 @@ class CarInterfaceBase(ABC):
       if main_enabled:
         if any(CS.main_buttons) and not cs_out.cruiseState.enabled:
           if not cs_out.madsEnabled:
-            events.add(EventName.buttonCancel)
+            #events.add(EventName.buttonCancel)
+            pass
       # do enable on both accel and decel buttons
       if cs_out.cruiseState.enabled and not CS.out.cruiseState.enabled and allow_enable:
         enable_pressed = True
         enable_pressed_long = True
       elif not cs_out.cruiseState.enabled:
         if not cs_out.madsEnabled:
-          events.add(EventName.buttonCancel)
+          #events.add(EventName.buttonCancel)
+          pass
         elif not self.enable_mads:
           cs_out.madsEnabled = False
     if enable_pressed:
