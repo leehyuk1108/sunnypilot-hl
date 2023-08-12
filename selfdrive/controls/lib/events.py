@@ -544,7 +544,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
 
   EventName.preLaneChangeLeft: {
     ET.WARNING: Alert(
-      "좌측의 안전을 확인하세요",
+      "좌측 차선 변경 승인 대기중",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, .1, alert_rate=0.75),
@@ -552,7 +552,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
 
   EventName.preLaneChangeRight: {
     ET.WARNING: Alert(
-      "우측의 안전을 확인하세요",
+      "우측 차선 변경 승인 대기중",
       "",
       AlertStatus.normal, AlertSize.small,
       Priority.LOW, VisualAlert.none, AudibleAlert.none, .1, alert_rate=0.75),
@@ -731,7 +731,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
       "브레이크에서 발을 떼면 활성화됩니다",
       "",
       AlertStatus.normal, AlertSize.small,
-      Priority.MID, VisualAlert.none, AudibleAlert.none, .1, creation_delay=1.),
+      Priority.LOW, VisualAlert.none, AudibleAlert.none, .1, creation_delay=1.),
   },
 
   EventName.gasPressedOverride: {
