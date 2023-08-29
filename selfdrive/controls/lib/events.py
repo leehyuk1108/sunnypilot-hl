@@ -244,7 +244,7 @@ def below_steer_speed_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.S
 def calibration_incomplete_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int) -> Alert:
   first_word = 'Recalibration' if sm['liveCalibration'].calStatus == log.LiveCalibrationData.Status.recalibrating else 'Calibration'
   return Alert(
-    f"캘리브레이션이 진행중입니다:{sm['liveCalibration'].calPerc:.0f}%",
+    f"캘리브레이션이 진행중입니다: {sm['liveCalibration'].calPerc:.0f}%",
     f"{get_display_speed(MIN_SPEED_FILTER, metric)}이상으로 주행하세요",
     AlertStatus.normal, AlertSize.mid,
     Priority.LOWEST, VisualAlert.none, AudibleAlert.none, .2)
@@ -253,7 +253,7 @@ def calibration_incomplete_alert(CP: car.CarParams, CS: car.CarState, sm: messag
 def no_gps_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int) -> Alert:
   return Alert(
     "GPS 수신 감도 나쁨",
-    "야외에서도 해당 메세지가 계속될경우 하드웨어 결함일 수 있습니다",
+    "야외에서도 해당 메세지가 계속될 경우 하드웨어 결함일 수 있습니다",
     AlertStatus.normal, AlertSize.mid,
     Priority.LOWER, VisualAlert.none, AudibleAlert.none, .2, creation_delay=300.)
 
@@ -261,7 +261,7 @@ def no_gps_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, m
 
 def out_of_space_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int) -> Alert:
   full_perc = round(100. - sm['deviceState'].freeSpacePercent)
-  return NormalPermanentAlert("용량 부족", f"{full_perc}%사용됨")
+  return NormalPermanentAlert("용량 부족", f"{full_perc}% 사용됨")
 
 
 def posenet_invalid_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int) -> Alert:
@@ -274,13 +274,13 @@ def posenet_invalid_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.Sub
 def process_not_running_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int) -> Alert:
   not_running = [p.name for p in sm['managerState'].processes if not p.running and p.shouldBeRunning]
   msg = ', '.join(not_running)
-  return NoEntryAlert(msg, alert_text_1="Process Not Running")
+  return NoEntryAlert(msg, alert_text_1="Process 실행 안됨")
 
 
 def comm_issue_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int) -> Alert:
   bs = [s for s in sm.data.keys() if not sm.all_checks([s, ])]
   msg = ', '.join(bs[:4])  # can't fit too many on one line
-  return NoEntryAlert(msg, alert_text_1="Communication Issue Between Processes")
+  return NoEntryAlert(msg, alert_text_1="Communication 에러가 발생했습니다")
 
 
 def camera_malfunction_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int) -> Alert:
@@ -333,7 +333,7 @@ def joystick_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster,
 def speed_limit_adjust_alert(CP: car.CarParams, CS: car.CarState, sm: messaging.SubMaster, metric: bool, soft_disable_time: int) -> Alert:
   speedLimit = sm['longitudinalPlan'].speedLimit
   speed = round(speedLimit * (CV.MS_TO_KPH if metric else CV.MS_TO_MPH))
-  message = f'{speed} {"km/h" if metric else "mph"}로 속도를 조정합니다 (속도 제한)'
+  message = f'{speed} {"km/h" if metric else "mph"}로 속도를 조정합니다 (속도 제한 감지됨)'
   return Alert(
     message,
     "",
@@ -351,7 +351,7 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
 
   EventName.joystickDebug: {
     ET.WARNING: joystick_alert,
-    ET.PERMANENT: NormalPermanentAlert("Joystick Mode"),
+    ET.PERMANENT: NormalPermanentAlert("조이스틱 모드"),
   },
 
   EventName.controlsInitializing: {
@@ -584,8 +584,8 @@ EVENTS: Dict[int, Dict[str, Union[Alert, AlertCallbackType]]] = {
 
   EventName.manualSteeringRequired: {
     ET.WARNING: Alert(
-      "조향 보조 꺼짐",
-      "직접 조향을 제어해주세요",
+      "오픈파일럿 꺼짐",
+      "수동 운전으로 전환됩니다",
       AlertStatus.normal, AlertSize.mid,
       Priority.LOW, VisualAlert.none, AudibleAlert.disengage, 1.),
   },

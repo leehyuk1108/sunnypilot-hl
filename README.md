@@ -41,7 +41,7 @@ Join the official sunnypilot Discord server to stay up to date with all the late
 
 </details>
 
-<details><summary><h3>🚘 Running on a dedicated device in a car</h3></summary>
+<details><summary><h3>🚘 Running oan a dedicated device in a car</h3></summary>
 
 ---
 
